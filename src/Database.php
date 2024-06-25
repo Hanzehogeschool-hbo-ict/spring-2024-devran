@@ -7,17 +7,8 @@ class Database
 {
     private \mysqli $db;
 
-    private function __construct() {
+    public function __construct() {
         $this->db = new \mysqli($_ENV['DB_HOST'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD'], $_ENV['DB_DATABASE'], $_ENV['DB_PORT']);
-    }
-
-    private static self $inst;
-
-    public static function inst(): self {
-        if (!isset(self::$inst)) {
-            self::$inst = new self();
-        }
-        return self::$inst;
     }
 
     // execute query with result

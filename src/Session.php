@@ -4,17 +4,8 @@ namespace Hive;
 
 // encapsulate session superglobal
 class Session {
-    private function __construct() {
+    public function __construct() {
         session_start();
-    }
-
-    private static self $inst;
-
-    public static function inst(): self {
-        if (!isset(self::$inst)) {
-            self::$inst = new self();
-        }
-        return self::$inst;
     }
 
     // get session variable
