@@ -11,8 +11,8 @@ jobs:
       with:
         args: --ignore-platform-reqs
     
-    # - uses: php-actions/phpunit@v3
-    - run: ./vendor/bin/phpunit
+    - uses: php-actions/phpunit@v3
+    # - run: ./vendor/bin/phpunit
     # - name: PHPUnit Tests
     #   uses: php-actions/phpunit@master
     #   with:
