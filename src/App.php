@@ -3,6 +3,23 @@
 namespace Hive;
 
 class App {
+
+    protected static ?self $instance = null;
+
+    private function __construct(protected Database $db, protected Session $session)
+    {
+    }
+
+    public static function getInstance(): self
+    {
+        if (!isset(static::$instance))
+        {
+            static::$instance = new static(new Database(), new Session());
+        }
+
+        return static::$instance;
+    }
+
     public function handle(): void {
         // get current route
         $path = explode('/', $_SERVER['PATH_INFO'] ?? '');
@@ -10,12 +27,12 @@ class App {
 
         // find corresponding controller
         $controller = match ($route) {
-            'index' => new IndexController(),
-            'move' => new MoveController(),
-            'pass' => new PassController(),
-            'play' => new PlayController(),
-            'restart' => new RestartController(),
-            'undo' => new UndoController(),
+            'index' => new IndexController($this->db, $this->session),
+            'move' => new MoveController($this->db, $this->session),
+            'pass' => new PassController($this->db, $this->session),
+            'play' => new PlayController($this->db, $this->session),
+            'restart' => new RestartController($this->db, $this->session),
+            'undo' => new UndoController($this->db, $this->session),
         };
 
         // dispatch get or post request
@@ -29,5 +46,15 @@ class App {
     // redirect to given url
     public static function redirect(string $url = '/') {
         header("Location: $url");
+    }
+
+    public function getDatabase(): Database
+    {
+        return $this->db;
+    }
+
+    public function getSession(): Session
+    {
+        return $this->session;
     }
 }
