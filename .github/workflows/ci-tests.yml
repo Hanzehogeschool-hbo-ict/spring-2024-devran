@@ -11,12 +11,12 @@ jobs:
       with:
         args: --ignore-platform-reqs
     
-    - uses: php-actions/phpunit@v3
-
-    - name: PHPUnit Tests
-      uses: php-actions/phpunit@master
-      with:
-        version: 11.2.5
-        bootstrap: vendor/autoload.php
-        configuration: test/phpunit.xml
-        args: --coverage-text
+    # - uses: php-actions/phpunit@v3
+    - run: vendor/bin/phpunit
+    # - name: PHPUnit Tests
+    #   uses: php-actions/phpunit@master
+    #   with:
+    #     version: 11.2.5
+    #     bootstrap: vendor/autoload.php
+    #     configuration: test/phpunit.xml
+    #     args: --coverage-text
