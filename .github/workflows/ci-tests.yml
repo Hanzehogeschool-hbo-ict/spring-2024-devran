@@ -10,6 +10,9 @@ jobs:
     
     - uses: php-actions/phpunit@v3
 
+    - name: Composer
+      run: composer install
+
     - name: PHPUnit Tests
       uses: php-actions/phpunit@master
       with:
