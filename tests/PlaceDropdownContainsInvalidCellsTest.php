@@ -2,6 +2,7 @@
 
 use Hive\App;
 use Hive\IndexController;
+use Hive\Session;
 use PHPUnit\Framework\TestCase;
 use Hive\Game;
 
@@ -9,7 +10,9 @@ class PlaceDropdownContainsInvalidCellsTest extends TestCase
 {
     public function testPlaceDropdownContainsInvalidCells()
     {
-        $session = App::getInstance()->getSession();
+        $app = App::getInstance();
+        $app->setSession(new Session());
+        $session = $app->getSession();
         $game = new Game();
         $game->board = [];
         $session->set('game', $game);

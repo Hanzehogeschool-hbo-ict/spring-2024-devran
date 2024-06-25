@@ -3,12 +3,15 @@
 use Hive\App;
 use Hive\Game;
 use Hive\PlayController;
+use Hive\Session;
 
 class CannotPlaceBeeWhenThreeStonesPlacedTest extends \PHPUnit\Framework\TestCase
 {
     public function testCannotPlaceBeeWhenThreeStonesPlaced()
     {
-        $session = App::getInstance()->getSession();
+        $app = App::getInstance();
+        $app->setSession(new Session());
+        $session = $app->getSession();
         $game = new Game();
         $game->board = [];
         $session->set('game', $game);

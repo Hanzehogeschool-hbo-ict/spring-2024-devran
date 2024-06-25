@@ -5,8 +5,10 @@ namespace Hive;
 class App {
 
     protected static ?self $instance = null;
+    protected Database $db;
+    protected Session $session;
 
-    private function __construct(protected Database $db, protected Session $session)
+    private function __construct()
     {
     }
 
@@ -14,7 +16,7 @@ class App {
     {
         if (!isset(static::$instance))
         {
-            static::$instance = new static(new Database(), new Session());
+            static::$instance = new static();
         }
 
         return static::$instance;
@@ -56,5 +58,15 @@ class App {
     public function getSession(): Session
     {
         return $this->session;
+    }
+
+    public function setDatabase(Database $db): void
+    {
+        $this->db = $db;
+    }
+
+    public function setSession(Session $session): void
+    {
+        $this->session = $session;
     }
 }

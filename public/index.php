@@ -1,6 +1,8 @@
 <?php
 
 use Hive\App;
+use Hive\Database;
+use Hive\Session;
 
 require_once('../vendor/autoload.php');
 
@@ -10,6 +12,8 @@ $dotenv = new Symfony\Component\Dotenv\Dotenv();
 $dotenv->load(__DIR__.'/../.env');
 
 $app = App::getInstance();
+$app->setDatabase(new Database());
+$app->setSession(new Session());
 $app->handle();
 
 ?>
