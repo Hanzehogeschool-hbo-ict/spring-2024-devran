@@ -1,17 +1,15 @@
 <?php
 
+use Hive\App;
 use Hive\IndexController;
-use Hive\Util;
 use PHPUnit\Framework\TestCase;
-use Hive\Database;
 use Hive\Game;
-use Hive\Session;
 
 class PlaceDropdownContainsInvalidCellsTest extends TestCase
 {
     public function testPlaceDropdownContainsInvalidCells()
     {
-        $session = Session::inst();
+        $session = App::getInstance()->getSession();
         $game = new Game();
         $game->board = [];
         $session->set('game', $game);

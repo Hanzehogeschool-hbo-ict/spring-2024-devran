@@ -1,17 +1,16 @@
 <?php
 
+use Hive\App;
 use Hive\PlayController;
 use PHPUnit\Framework\TestCase;
-use Hive\Database;
 use Hive\Game;
-use Hive\Session;
 
 class PlayedStoneNotShownTest extends TestCase
 {
 //    testGivenHandWhenStoneCountZeroThenNoShow
     public function testShouldNotShowStone()
     {
-        $session = Session::inst();
+        $session = App::getInstance()->getSession();
         $game = new Game();
         $session->set('game', $game);
         $playController = new PlayController(null, $session);
