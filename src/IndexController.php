@@ -5,13 +5,14 @@ namespace Hive;
 /**
  * Handle index page.
  */
-class IndexController
+class IndexController extends Controller
 {
-    public function handleGet() {
-        $session = Session::inst();
+    public function handleGet(): void {
+        if (!isset($this->session))
+            return;
 
         // ensure session contains a game
-        $game = $session->get('game');
+        $game = $this->session->get('game');
         if (!$game) {
             App::redirect('/restart');
             return;

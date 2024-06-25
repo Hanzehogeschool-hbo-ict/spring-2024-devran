@@ -2,7 +2,7 @@
 
 namespace Hive;
 
-class AIController
+class AIController extends Controller
 {
     public function handlePost() {
         // TODO: AI is not implemented yet

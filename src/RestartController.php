@@ -3,16 +3,20 @@
 namespace Hive;
 
 // restart the game
-class RestartController {
+class RestartController extends Controller {
     public function handleGet() {
+        if (!isset($this->session))
+            return;
+
         // create new game
-        $session = Session::inst();
-        $session->set('game', new Game());
+        $this->session->set('game', new Game());
+
+        if (!isset($this->db))
+            return;
 
         // get new game id from database
-        $db = Database::inst();
-        $db->Execute('INSERT INTO games VALUES ()');
-        $session->set('game_id', $db->Get_Insert_Id());
+        $this->db->Execute('INSERT INTO games VALUES ()');
+        $this->session->set('game_id', $this->db->Get_Insert_Id());
 
         // redirect back to index
         App::redirect();
