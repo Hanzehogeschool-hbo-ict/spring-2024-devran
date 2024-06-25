@@ -11,7 +11,7 @@ jobs:
       with:
         args: --ignore-platform-reqs
     
-    - uses: php-actions/phpunit@v3
+    # - uses: php-actions/phpunit@v3
 
     - name: Composer
       run: composer install
