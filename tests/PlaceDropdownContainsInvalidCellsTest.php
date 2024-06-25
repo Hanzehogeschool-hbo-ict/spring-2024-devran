@@ -15,8 +15,7 @@ class PlaceDropdownContainsInvalidCellsTest extends TestCase
         $game = new Game();
         $game->board = [];
         $session->set('game', $game);
-        $db = Database::inst();
-        $indexController = new IndexController();
+        $indexController = new IndexController(null, $session);
 
         $game->board["0,0"] = [["A", 0]];
         $game->board["0,1"] = [["Q", 1]];
