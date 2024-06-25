@@ -9,14 +9,16 @@ jobs:
     - name: Run composer
       uses: php-actions/composer@v6
       with:
+        php_version: 8.3
         args: --ignore-platform-reqs
     
-    - uses: php-actions/phpunit@v3
+    # - uses: php-actions/phpunit@v3
     # - run: ./vendor/bin/phpunit
-    # - name: PHPUnit Tests
-    #   uses: php-actions/phpunit@master
-    #   with:
-    #     version: 11.2.5
-    #     bootstrap: vendor/autoload.php
-    #     configuration: test/phpunit.xml
-    #     args: --coverage-text
+    - name: PHPUnit Tests
+      uses: php-actions/phpunit@master
+      with:
+        version: 11.2.5
+        php_version: 8.3
+        # bootstrap: vendor/autoload.php
+        configuration: phpunit.xml
+        args: --coverage-text
