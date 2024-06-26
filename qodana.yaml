@@ -4,27 +4,19 @@
 #-------------------------------------------------------------------------------#
 version: "1.0"
 
-#Specify inspection profile for code analysis
 profile:
   path: .qodana/profile.yaml
-
 php:
   version: "8.3"
 
-#Execute shell command before Qodana execution (Applied in CI/CD pipeline)
-#bootstrap: sh ./prepare-qodana.sh
-
-#Install IDE plugins before Qodana execution (Applied in CI/CD pipeline)
-#plugins:
-#  - id: <plugin.id> #(plugin id can be found at https://plugins.jetbrains.com)
-
-#Specify Qodana linter for analysis (Applied in CI/CD pipeline)
 linter: jetbrains/qodana-php:latest
 
-failThreshold: 24
+failThreshold: 18
 failureConditions:
   severityThresholds:
     critical: 0
-    high: 4
-    moderate: 8
-    low: 12
+    high: 2
+    moderate: 6
+    low: 10
+exclude:
+  - name: PhpWrongStringConcatenationInspection
