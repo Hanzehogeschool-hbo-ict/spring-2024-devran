@@ -39,10 +39,7 @@ class Database
     // execute query without result
     public function execute(string $query, array $params): void
     {
-        $result = $this->query($query, $params);
-        if ($result === false) {
-            throw new RuntimeException($this->db->error);
-        }
+        $this->query($query, $params);
     }
 
     // escape string for mysql
