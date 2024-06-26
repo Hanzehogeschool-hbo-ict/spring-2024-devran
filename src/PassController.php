@@ -23,8 +23,8 @@ class PassController extends Controller {
         $last = $this->session->get('last_move') ?? 'null';
         $this->db->query("
                 insert into moves (game_id, type, move_from, move_to, previous_id, state)
-                values ({$this->session->get('game_id')}, \"pass\", null, null, $last, \"$state\")
-            ");
+                values (?, ?, ?, ?, ?, ?);
+            ", [$this->session->get('game_id'), "pass", null, null, $last, $state]);
         $this->session->set('last_move', $this->db->getInsertId());
 
         // redirect back to index
