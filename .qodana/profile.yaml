@@ -9,6 +9,8 @@ inspections:
       m_maxLength: 22
   - inspection: PhpVulnerablePathsInspection
     enabled: true
-  - group: ALL
-    ignore:
+
+exclude:
+  - name: All
+    patterns:
       - "vendor/**"
