@@ -20,6 +20,3 @@ failureConditions:
     low: 10
 exclude:
   - name: PhpWrongStringConcatenationInspection
-  - name: Vendor exclude
-    paths:
-      - "vendor/**"
