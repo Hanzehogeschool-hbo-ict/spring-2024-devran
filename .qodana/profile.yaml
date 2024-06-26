@@ -4,5 +4,15 @@ baseProfile: qodana.recommended
 inspections:
   - inspection: PhpMethodNamingConventionInspection
     enabled: true
+    options:
+      m_minLength: 3
+      m_maxLength: 22
   - inspection: PhpVulnerablePathsInspection
     enabled: true
+
+failureConditions:
+  severityThresholds:
+    critical: 0
+    high: 4
+    moderate: 8
+    low: 12
