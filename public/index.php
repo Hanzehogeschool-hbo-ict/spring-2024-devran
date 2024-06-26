@@ -15,5 +15,3 @@ $app = App::getInstance();
 $app->setDatabase(new Database());
 $app->setSession(new Session());
 $app->handle();
-
-?>

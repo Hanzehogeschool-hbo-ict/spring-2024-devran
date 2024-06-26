@@ -46,11 +46,11 @@ class MoveController extends Controller
             // TODO: rules for other tiles aren't implemented yet
             if ($this->session->get('error')) {
                 // illegal move so reset tile that was temporarily removed
-                if (isset($game->board[$from])) array_push($game->board[$from], $tile);
+                if (isset($game->board[$from])) $game->board[$from][] = $tile;
                 else $game->board[$from] = [$tile];
             } else {
                 // move tile to new position and switch players
-                if (isset($game->board[$to])) array_push($game->board[$to], $tile);
+                if (isset($game->board[$to])) $game->board[$to][] = $tile;
                 else $game->board[$to] = [$tile];
                 $game->player = 1 - $game->player;
 
