@@ -48,8 +48,8 @@ class PlayController extends Controller
             $last = $this->session->get('last_move') ?? 'null';
             $this->db->execute("
                 insert into moves (game_id, type, move_from, move_to, previous_id, state)
-                values ({$this->session->get('game_id')}, \"play\", \"$piece\", \"$to\", $last, \"$state\")
-            ");
+                values (?, ?, ?, ?, ?, ?);
+            ", [$this->session->get('game_id'), "play", $piece, $to, $last, $state]);
             $this->session->set('last_move', $this->db->getInsertId());
         }
 

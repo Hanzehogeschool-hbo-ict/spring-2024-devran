@@ -16,7 +16,7 @@ class RestartController extends Controller {
             return;
 
         // get new game id from database
-        $this->db->execute('INSERT INTO games VALUES ()');
+        $this->db->execute('INSERT INTO games VALUES ()', []);
         $this->session->set('game_id', $this->db->getInsertId());
 
         // redirect back to index

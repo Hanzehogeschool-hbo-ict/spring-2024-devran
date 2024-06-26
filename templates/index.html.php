@@ -166,7 +166,7 @@
     // render list of moves
     $db = App::getInstance()->getDatabase();
     $session = App::getInstance()->getSession();
-    $result = $db->query("SELECT * FROM moves WHERE game_id = {$session->get('game_id')}");
+    $result = $db->query("SELECT * FROM moves WHERE game_id = ?", [$session->get('game_id')]);
     while ($row = $result->fetch_array()) {
         echo '<li>'.$row[2].' '.$row[3].' '.$row[4].'</li>';
     }

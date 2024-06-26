@@ -16,8 +16,20 @@ class Database
     }
 
     // execute query with result
-    public function query(string $string): mysqli_result {
-        $result = $this->db->query($string);
+    public function query(string $query, array $params): mysqli_result
+    {
+        $paramTypes = "";
+        foreach ($params as $param) {
+            $paramTypes = $paramTypes . $this->getParamType($param);
+        }
+
+        $statement = $this->db->prepare($query);
+
+        if ($paramTypes)
+            $statement->bind_param($paramTypes, ...$params);
+
+        $statement->execute($params);
+        $result = $statement->get_result();
         if ($result === false) {
             throw new RuntimeException($this->db->error);
         }
@@ -25,9 +37,9 @@ class Database
     }
 
     // execute query without result
-    public function execute(string $string): void
+    public function execute(string $query, array $params): void
     {
-        $result = $this->db->query($string);
+        $result = $this->query($query, $params);
         if ($result === false) {
             throw new RuntimeException($this->db->error);
         }
@@ -41,5 +53,16 @@ class Database
     // get last insert id
     public function getInsertId(): int {
         return intval($this->db->insert_id);
+    }
+
+    protected function getParamType($param): string
+    {
+        $type = gettype($param);
+        if ($type == "integer")
+            return "i";
+        if ($type == "string")
+            return "s";
+
+        return "";
     }
 }
