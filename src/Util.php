@@ -10,7 +10,8 @@ class Util {
     private function __construct() {}
 
     // check if both positions are neighbours
-    public static function isNeighbour(string $a, string $b) {
+    public static function isNeighbour(string $a, string $b): bool
+    {
         $a = explode(',', $a);
         $b = explode(',', $b);
         // two tiles are neighbours if their FIRST coordinate is the same and the SECOND one differs by one
@@ -19,19 +20,23 @@ class Util {
         if ($a[1] == $b[1] && abs($a[0] - $b[0]) == 1) return true;
         // two tiles are also neighbours if BOTH coordinates differ by one and both DIFFERENCES sum to zero
         // e.g., 0,0 and -1,1 are neigbours
-        if ($a[0] + $a[1] == $b[0] + $b[1]) return true;
+        if ($a[0] + $a[1] == $b[0] + $b[1]) return true; // $a en $b zijn strings maar worden opgeteld als nummers. Dit maakt niet uit want php veranderd het intern voor je.
         return false;
     }
 
     // check if a position has a neighbour already on the board
-    public static function has_NeighBour(string $a, array $board) {
+    public static function hasNeighbour(string $a, array $board): bool
+    {
         foreach (array_keys($board) as $b) {
             if (self::isNeighbour($a, $b)) return true;
         }
+
+        return false;
     }
 
     // check if all neighbours of a position belong to the same player
-    public static function neighboursAreSameColor(int $player, string $a, array $board) {
+    public static function neighboursAreSameColor(int $player, string $a, array $board): bool
+    {
         foreach ($board as $b => $st) {
             if (!$st) continue;
             $c = $st[count($st) - 1][0];
@@ -41,7 +46,8 @@ class Util {
     }
 
     // check if the hive is currently split
-    public static function hasMultipleHives(array $board) {
+    public static function hasMultipleHives(array $board): bool
+    {
         // use flood fill to find all tiles reachable from a single (essentially random) tile
         // if any tiles are unreachable, the hive is split
         $all = array_keys($board);
@@ -63,9 +69,10 @@ class Util {
 
     // check whether a move between two positions is valid given the rules for slides
     // which are used by all tiles except the grasshopper
-    public static function slide(array $board, string $from, string $to) {
+    public static function slide(array $board, string $from, string $to): bool
+    {
         // a slide is only valid if from and to are neighbours and to connects to the remainder of the hive
-        if (!self::has_NeighBour($to, $board)) return false;
+        if (!self::hasNeighbour($to, $board)) return false;
         if (!self::isNeighbour($from, $to)) return false;
 
         // find the two common neighbours of the origin and target tiles

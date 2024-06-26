@@ -20,7 +20,7 @@ class PlayController extends Controller
         } elseif (isset($game->board[$to])) {
             // can only play on empty positions (even beetles)
             $this->session->set('error', 'Board position is not empty');
-        } elseif (count($game->board) && !Util::has_NeighBour($to, $game->board)) {
+        } elseif (count($game->board) && !Util::hasNeighBour($to, $game->board)) {
             // every tile except the very first one of the game must be played adjacent to the hive
             $this->session->set('error', "board position has no neighbour");
         } elseif (array_sum($hand) < 11 && !Util::neighboursAreSameColor($game->player, $to, $game->board)) {
@@ -44,13 +44,13 @@ class PlayController extends Controller
                 return;
 
             // store move in database
-            $state = $this->db->Escape($game);
+            $state = $this->db->escape($game);
             $last = $this->session->get('last_move') ?? 'null';
-            $this->db->Execute("
+            $this->db->execute("
                 insert into moves (game_id, type, move_from, move_to, previous_id, state)
                 values ({$this->session->get('game_id')}, \"play\", \"$piece\", \"$to\", $last, \"$state\")
             ");
-            $this->session->set('last_move', $this->db->Get_Insert_Id());
+            $this->session->set('last_move', $this->db->getInsertId());
         }
 
         // redirect back to index

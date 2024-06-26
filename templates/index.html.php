@@ -7,6 +7,9 @@
 <body>
 <div class="board">
     <?php
+
+    use Hive\App;
+
     $width = 35;
     $height = 30;
 
@@ -126,7 +129,15 @@
         <?php
         // render list of positions in board
         foreach (array_keys($game->board) as $pos) {
-            echo "<option value=\"$pos\">$pos</option>";
+            if ($game->player == 0) {
+                if (array_search($pos, array_keys($game->board)) % 2 == 0) {
+                    echo "<option value=\"$pos\">$pos</option>";
+                }
+            } else if ($game->player == 1) {
+                if (array_search($pos, array_keys($game->board)) % 2 != 0) {
+                    echo "<option value=\"$pos\">$pos</option>";
+                }
+            }
         }
         ?>
     </select>
@@ -153,9 +164,9 @@
 <ol>
     <?php
     // render list of moves
-    $db = \Hive\Database::inst();
-    $session = \Hive\Session::inst();
-    $result = $db->Query("SELECT * FROM moves WHERE game_id = {$session->get('game_id')}");
+    $db = App::getInstance()->getDatabase();
+    $session = App::getInstance()->getSession();
+    $result = $db->query("SELECT * FROM moves WHERE game_id = {$session->get('game_id')}");
     while ($row = $result->fetch_array()) {
         echo '<li>'.$row[2].' '.$row[3].' '.$row[4].'</li>';
     }

@@ -4,7 +4,8 @@ namespace Hive;
 
 // restart the game
 class RestartController extends Controller {
-    public function handleGet() {
+    public function handleGet(): void
+    {
         if (!isset($this->session))
             return;
 
@@ -15,8 +16,8 @@ class RestartController extends Controller {
             return;
 
         // get new game id from database
-        $this->db->Execute('INSERT INTO games VALUES ()');
-        $this->session->set('game_id', $this->db->Get_Insert_Id());
+        $this->db->execute('INSERT INTO games VALUES ()');
+        $this->session->set('game_id', $this->db->getInsertId());
 
         // redirect back to index
         App::redirect();

@@ -19,13 +19,13 @@ class PassController extends Controller {
             return;
 
         // store move in database
-        $state = $this->db->Escape($game);
+        $state = $this->db->escape($game);
         $last = $this->session->get('last_move') ?? 'null';
-        $this->db->Query("
+        $this->db->query("
                 insert into moves (game_id, type, move_from, move_to, previous_id, state)
                 values ({$this->session->get('game_id')}, \"pass\", null, null, $last, \"$state\")
             ");
-        $this->session->set('last_move', $this->db->Get_Insert_Id());
+        $this->session->set('last_move', $this->db->getInsertId());
 
         // redirect back to index
         App::redirect();

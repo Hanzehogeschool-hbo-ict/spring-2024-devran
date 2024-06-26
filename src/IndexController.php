@@ -31,7 +31,7 @@ class IndexController extends Controller
         foreach (Util::OFFSETS as $qr) {
             foreach (array_keys($board) as $pos) {
                 $qr2 = explode(',', $pos);
-                $to[] = ($qr[0] + $qr2[0]).','.($qr[1] + $qr2[1]);
+                $to[] = ($qr[0] + $qr2[0]).','.($qr[1] + $qr2[1]); // $qr en $qr2 zijn strings maar worden opgeteld als nummers. Dit maakt niet uit want php veranderd het intern voor je.
             }
         }
         $to = array_unique($to);
