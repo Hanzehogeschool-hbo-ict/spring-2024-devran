@@ -1,0 +1,8 @@
+name: "Code Sniffer"
+baseProfile: qodana.recommended
+
+inspections:
+  - inspection: PhpMethodNamingConventionInspection
+    enabled: true
+  - inspection: PhpVulnerablePathsInspection
+    enabled: true
