@@ -20,3 +20,11 @@ php:
 
 #Specify Qodana linter for analysis (Applied in CI/CD pipeline)
 linter: jetbrains/qodana-php:latest
+
+failThreshold: 24
+failureConditions:
+  severityThresholds:
+    critical: 0
+    high: 4
+    moderate: 8
+    low: 12

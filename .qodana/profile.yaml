@@ -9,10 +9,3 @@ inspections:
       m_maxLength: 22
   - inspection: PhpVulnerablePathsInspection
     enabled: true
-
-failureConditions:
-  severityThresholds:
-    critical: 0
-    high: 4
-    moderate: 8
-    low: 12
