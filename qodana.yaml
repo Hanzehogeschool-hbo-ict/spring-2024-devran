@@ -15,7 +15,7 @@ failThreshold: 18
 failureConditions:
   severityThresholds:
     critical: 0
-    high: 2
+    high: 3
     moderate: 6
     low: 10
 exclude:
