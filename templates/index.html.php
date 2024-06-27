@@ -9,6 +9,7 @@
     <?php
 
     use Hive\App;
+    use Hive\Game;
 
     $width = 35;
     $height = 30;
@@ -16,6 +17,7 @@
     // find minimum values for q and r to render board
     $min_q = 1000;
     $min_r = 1000;
+    /** @var Game $game */
     foreach ($game->board as $pos => $tile) {
         $qr = explode(',', $pos);
         if ($qr[0] < $min_q) $min_q = $qr[0];
@@ -47,6 +49,7 @@
     }
 
     // render empty tiles adjacent to existing tiles
+    /** @var array $to */
     foreach ($to as $pos) {
         if (!array_key_exists($pos, $game->board)) {
             $qr = explode(',', $pos);
