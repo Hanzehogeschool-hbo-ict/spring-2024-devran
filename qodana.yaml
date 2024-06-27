@@ -20,3 +20,6 @@ failureConditions:
     low: 10
 exclude:
   - name: PhpWrongStringConcatenationInspection
+  - name: All
+    paths:
+      - vendor/squizlabs

@@ -1,11 +1,6 @@
 name: "Code Sniffer"
 baseProfile: qodana.recommended
 
-exclude:
-  - name: All
-    patterns:
-      - "vendor/**"
-
 inspections:
   - inspection: PhpMethodNamingConventionInspection
     enabled: true
