@@ -162,7 +162,7 @@
 </form>
 <strong><?php
     // render error message
-    if (isset($_SESSION['error'])) echo($_SESSION['error']); unset($_SESSION['error']);
+    if (isset($sessionError)) echo($sessionError); unset($sessionError);
 ?></strong>
 <ol>
     <?php
