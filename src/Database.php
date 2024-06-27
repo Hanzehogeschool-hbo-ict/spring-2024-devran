@@ -5,7 +5,6 @@ namespace Hive;
 // database connectivity
 use mysqli;
 use mysqli_result;
-use RuntimeException;
 
 class Database
 {
@@ -16,8 +15,11 @@ class Database
     }
 
     // execute query with result
-    public function query(string $query, array $params): mysqli_result
+    public function query(string $query, array $params): ?mysqli_result
     {
+        if (!$params)
+            return null;
+
         $paramTypes = "";
         foreach ($params as $param) {
             $paramTypes = $paramTypes . $this->getParamType($param);
@@ -25,13 +27,13 @@ class Database
 
         $statement = $this->db->prepare($query);
 
-        if ($paramTypes)
+        if (!empty($paramTypes))
             $statement->bind_param($paramTypes, ...$params);
 
         $statement->execute($params);
         $result = $statement->get_result();
         if ($result === false) {
-            throw new RuntimeException($this->db->error);
+            return null;
         }
         return $result;
     }
