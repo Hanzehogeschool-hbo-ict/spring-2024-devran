@@ -19,7 +19,12 @@ class IndexController extends Controller
         }
 
         $to = $this->getAdjacentPositions($game->board);
-        $sessionError = $_SESSION['error'];
+
+        $sessionError = "";
+        if (isset($_SESSION['error'])) {
+            $sessionError = $_SESSION['error'];
+           echo gettype($_SESSION['error']);
+        }
 
         // render view
         require_once TEMPLATE_DIR.'/index.html.php';
