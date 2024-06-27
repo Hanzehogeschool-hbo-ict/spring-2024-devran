@@ -102,4 +102,50 @@ class Util {
         // to physically slide to the target location without having to squeeze between two tiles
         return min(count($a), count($b)) <= max(count($from), count($to));
     }
+
+    public static function checkWinCondition(array $board): string
+    {
+        $queenWhitePos = [];
+        $queenBlackPos = [];
+
+        // find queen bees
+        foreach ($board as $pos) {
+            if ($pos[0][0] == "Q") {
+                if ($pos[0][1] == 0) {
+                    $queenWhitePos = explode(',', array_search($pos, $board));
+                }
+                else {
+                    $queenBlackPos = explode(',', array_search($pos, $board));
+                }
+            }
+        }
+
+        // Check queen white adjacent cells for stones
+        $numNeighboursWhite = 0;
+        $numNeighboursBlack = 0;
+
+        foreach (Util::OFFSETS as $offset) {
+            $q = $queenWhitePos[0] + $offset[0];
+            $r = $queenWhitePos[1] + $offset[1];
+            if (array_key_exists($q . "," . $r, $board))
+                $numNeighboursWhite += 1;
+
+            $q = $queenBlackPos[0] + $offset[0];
+            $r = $queenBlackPos[1] + $offset[1];
+            if (array_key_exists($q . "," . $r, $board))
+                $numNeighboursBlack += 1;
+        }
+        $queenWhiteSurrounded = $numNeighboursWhite === 6;
+        $queenBlackSurrounded = $numNeighboursBlack === 6;
+
+
+        if ($queenWhiteSurrounded && $queenBlackSurrounded)
+            return "tie";
+        if ($queenWhiteSurrounded)
+            return "black";
+        if ($queenBlackSurrounded)
+            return "white";
+
+        return "";
+    }
 }
