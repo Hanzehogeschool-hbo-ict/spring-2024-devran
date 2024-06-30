@@ -2,7 +2,8 @@
   "require": {
     "php": ">=8.3",
     "ext-mysqli": "*",
-    "symfony/dotenv": "^7.0"
+    "symfony/dotenv": "^7.0",
+    "ext-curl": "*"
   },
   "autoload": {
     "psr-4": {
