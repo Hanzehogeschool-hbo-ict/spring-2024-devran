@@ -34,10 +34,7 @@ class PlayController extends Controller
             $game->board[$to] = [[$game->player, $piece]];
             $game->hand[$game->player][$piece]--;
 
-            // remove stone type from hand when all stones of this type have been played
-            if ($game->hand[$game->player][$piece] === 0)
-                unset($game->hand[$game->player][$piece]);
-
+            // Switch current player
             $game->player = 1 - $game->player;
 
             if (!isset($this->db))
@@ -49,8 +46,12 @@ class PlayController extends Controller
             $this->db->execute("
                 insert into moves (game_id, type, move_from, move_to, previous_id, state)
                 values (?, ?, ?, ?, ?, ?);
-            ", [$this->session->get('game_id'), "play", $piece, $to, $last, $state]);
+            ", [$this->session->get('game_id'), "play", $piece, $to, (int)$last, $state]);
             $this->session->set('last_move', $this->db->getInsertId());
+
+            // Let AI play
+            $ai = new AIController($this->db, $this->session);
+            $ai->handlePost($game);
         }
 
         // redirect back to index
