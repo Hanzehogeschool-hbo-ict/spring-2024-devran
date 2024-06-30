@@ -39,14 +39,9 @@ class PlayController extends Controller
 
             if (!isset($this->db))
                 return;
+            // Store move in database
+            $this->saveToDatabase("play", $piece, $to);
 
-            // store move in database
-            $state = $this->db->escape($game);
-            $last = $this->session->get('last_move') ?? 'null';
-            $this->db->execute("
-                insert into moves (game_id, type, move_from, move_to, previous_id, state)
-                values (?, ?, ?, ?, ?, ?);
-            ", [$this->session->get('game_id'), "play", $piece, $to, (int)$last, $state]);
             $this->session->set('last_move', $this->db->getInsertId());
 
             // Let AI play

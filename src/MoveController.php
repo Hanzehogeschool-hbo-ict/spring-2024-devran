@@ -42,10 +42,10 @@ class MoveController extends Controller
                 // queen bees and beetles must move a single hex using the sliding rules
                 if (!Util::slide($game->board, $from, $to))
                     $this->session->set("error", 'Tile must slide');
-            } else if ($tile[1] == "A") {
-
             }
+
             // TODO: rules for other tiles aren't implemented yet
+
             if ($this->session->get('error')) {
                 // illegal move so reset tile that was temporarily removed
                 if (isset($game->board[$from])) $game->board[$from][] = $tile;
@@ -60,14 +60,9 @@ class MoveController extends Controller
 
                 if (!isset($this->db))
                     return;
+                // Store move in database
+                $this->saveToDatabase("move", $from, $to);
 
-                // store move in database
-                $state = $this->db->escape($game);
-                $last = $this->session->get('last_move') ?? 'null';
-                $this->db->execute("
-                    insert into moves (game_id, type, move_from, move_to, previous_id, state)
-                    values (?, ?, ?, ?, ?, ?);
-                ", [$this->session->get('game_id'), "move", $from, $to, $last, $state]);
                 $this->session->set('last_move', $this->db->getInsertId());
 
                 // Let AI play
