@@ -6,10 +6,10 @@ class AIController extends Controller
 {
     public function handlePost(Game $game): void
     {
-        $url = "ows-ai-1:5000";
+        $url = "spring-2024-devran-ai-1:5000";
 
         $resData = $this->sendMove($url, count($game->board), $game->hand, $game->board);
-        // De data die de AI terugstuurt bij de eerste zet is leeg om de een of andere reden
+        // De data die de AI terugstuurt bij de eerste zet is soms leeg om de een of andere reden
         if (!$resData) {
             App::redirect();
             return;
