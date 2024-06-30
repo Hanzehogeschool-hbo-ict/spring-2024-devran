@@ -113,7 +113,7 @@
         <?php
         // render list of tile types
         foreach ($game->hand[$game->player] as $tile => $ct) {
-            if ($ct < 1)
+            if ($ct > 0)
                 echo "<option value=\"$tile\">$tile</option>";
         }
         ?>
