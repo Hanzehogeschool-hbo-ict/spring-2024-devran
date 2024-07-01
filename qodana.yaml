@@ -24,3 +24,5 @@ exclude:
     paths:
       - vendor/squizlabs
       - vendor/phpunit
+      - qodana.sarif_report_after.json
+      - qodana.sarif_report_before.json
