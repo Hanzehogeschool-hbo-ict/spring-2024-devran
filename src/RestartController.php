@@ -11,6 +11,7 @@ class RestartController extends Controller {
 
         // create new game
         $this->session->set('game', new Game());
+        $this->session->set("error", '');
 
         if (!isset($this->db))
             return;
