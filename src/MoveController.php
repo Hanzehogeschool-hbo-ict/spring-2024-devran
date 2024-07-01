@@ -51,9 +51,9 @@ class MoveController extends Controller
                 if (isset($game->board[$from])) $game->board[$from][] = $tile;
                 else $game->board[$from] = [$tile];
             } else {
-                // move tile to new position and switch players
-                if (isset($game->board[$to])) $game->board[$to][] = $tile;
-                else $game->board[$to] = [$tile];
+                // move tile to new position and remove old position form board
+                $game->board[$to] = [$tile];
+                unset($game->board[$from]);
 
                 // Switch current player
                 $game->player = 1 - $game->player;
