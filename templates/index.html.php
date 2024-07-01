@@ -71,16 +71,9 @@
     <select name="from">
         <?php
         // render list of positions in board
-        foreach (array_keys($game->board) as $pos) {
-            if ($game->player == 0) {
-                if (array_search($pos, array_keys($game->board)) % 2 == 0) {
-                    echo "<option value=\"$pos\">$pos</option>";
-                }
-            } else if ($game->player == 1) {
-                if (array_search($pos, array_keys($game->board)) % 2 != 0) {
-                    echo "<option value=\"$pos\">$pos</option>";
-                }
-            }
+        foreach ($game->board as $key => $val) {
+            if ($val[0][0] == $game->player)
+                echo "<option value=\"$key\">$key</option>";
         }
         ?>
     </select>
