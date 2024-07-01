@@ -4,7 +4,7 @@ namespace Hive;
 
 // pass, which should only be allowed if there are no other valid moves
 class PassController extends Controller {
-    public function handlePost(string $from, string $to): void {
+    public function handlePost(): void {
         if (!isset($this->session))
             return;
 
