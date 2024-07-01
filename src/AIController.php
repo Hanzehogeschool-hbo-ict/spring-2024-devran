@@ -17,7 +17,11 @@ class AIController extends Controller
         $url = "spring-2024-devran-ai-1:5000";
         $game = $this->session->get('game');
 
-        $resData = $this->aiService->sendMove($url, count($game->board), $game->hand, $game->board);
+        $numMoves = $this->db->query("
+                SELECT COUNT(*) AS num_moves FROM moves 
+                WHERE game_id = ?;
+            ", [$this->session->get('game_id')]);
+        $resData = $this->aiService->sendMove($url, $numMoves->field_count, $game->hand, $game->board);
         // De data die de AI terugstuurt bij de eerste zet is soms leeg om de een of andere reden
         if (!$resData) {
             App::redirect();
