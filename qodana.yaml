@@ -19,7 +19,7 @@ failureConditions:
     moderate: 6
     low: 10
 exclude:
-  - name: PhpWrongStringConcatenationInspection
+  - name: PhpWrongStringConcatenationInspection # er zijn strings die worden opgeteld als nummers. Dit maakt niet uit want php veranderd het intern voor je.
   - name: All
     paths:
       - vendor/squizlabs
