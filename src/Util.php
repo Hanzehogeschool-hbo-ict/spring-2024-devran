@@ -20,7 +20,8 @@ class Util {
         if ($a[1] == $b[1] && abs($a[0] - $b[0]) == 1) return true;
         // two tiles are also neighbours if BOTH coordinates differ by one and both DIFFERENCES sum to zero
         // e.g., 0,0 and -1,1 are neigbours
-        if ($a[0] + $a[1] == $b[0] + $b[1]) return true; // $a en $b zijn strings maar worden opgeteld als nummers. Dit maakt niet uit want php veranderd het intern voor je.
+        if ($a[0] + $a[1] == $b[0] + $b[1]) return true; // $a en $b zijn strings maar worden opgeteld als nummers.
+        //Dit maakt niet uit want php veranderd het intern voor je.
         return false;
     }
 
