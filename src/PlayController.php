@@ -26,7 +26,7 @@ class PlayController extends Controller
         } elseif (array_sum($hand) < 11 && !Util::neighboursAreSameColor($game->player, $to, $game->board)) {
             // every tile after the first one a player plays may not be adjacent to enemy tiles
             $this->session->set("error", "Board position has opposing neighbour");
-        } elseif (array_sum($hand) <= 8 && $hand['Q'] && $piece !== "Q") {
+        } elseif (array_sum($hand) <= 8 && $hand['Q'] > 0 && $piece !== "Q") {
             // must play the queen bee in one of the first four turns
             $this->session->set('error', 'Must play queen bee');
         } else {
