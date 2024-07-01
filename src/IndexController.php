@@ -27,7 +27,6 @@ class IndexController extends Controller
         $sessionError = "";
         if (isset($_SESSION['error'])) {
             $sessionError = $_SESSION['error'];
-           echo gettype($_SESSION['error']);
         }
 
         // render view
