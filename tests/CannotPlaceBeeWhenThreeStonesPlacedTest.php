@@ -10,8 +10,8 @@ class CannotPlaceBeeWhenThreeStonesPlacedTest extends \PHPUnit\Framework\TestCas
     public function testCannotPlaceBeeWhenThreeStonesPlaced()
     {
         $app = App::getInstance();
-        $app->setSession(new Session());
-        $session = $app->getSession();
+        $session = new Session();
+        $app->setSession($session);
         $game = new Game();
         $game->board = [];
         $session->set('game', $game);
@@ -26,8 +26,10 @@ class CannotPlaceBeeWhenThreeStonesPlacedTest extends \PHPUnit\Framework\TestCas
 
         $playController->handlePost("G", "1,-2"); // W, can't be stone other than queen
         $this->assertArrayHasKey("G", $game->hand[0]); // Ensure last grass hopper can't be placed as 4th move
+        $session->set("error", "");
 
         $playController->handlePost("Q", "1,-2"); // W, must be queen
         $this->assertTrue($game->hand[0]["Q"] === 0);
+
     }
 }
