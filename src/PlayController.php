@@ -45,8 +45,8 @@ class PlayController extends Controller
             $this->session->set('last_move', $this->db->getInsertId());
 
             // Let AI play
-            $ai = new AIController($this->db, $this->session);
-            $ai->handlePost($game);
+            $ai = new AIController($this->db, $this->session, new AIService());
+            $ai->handlePost();
         }
 
         // redirect back to index
