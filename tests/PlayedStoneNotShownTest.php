@@ -20,6 +20,6 @@ class PlayedStoneNotShownTest extends TestCase
 
         $playController->handlePost("Q", "0,0");
 
-        $this->assertArrayNotHasKey("Q", $game->hand[0]);
+        $this->assertTrue($game->hand[0]["Q"] === 0);
     }
 }

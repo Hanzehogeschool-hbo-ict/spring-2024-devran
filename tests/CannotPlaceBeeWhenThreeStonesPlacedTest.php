@@ -28,7 +28,6 @@ class CannotPlaceBeeWhenThreeStonesPlacedTest extends \PHPUnit\Framework\TestCas
         $this->assertArrayHasKey("G", $game->hand[0]); // Ensure last grass hopper can't be placed as 4th move
 
         $playController->handlePost("Q", "1,-2"); // W, must be queen
-        $this->assertArrayNotHasKey("Q", $game->hand[0]); // Ensure queen has been placed by white
-
+        $this->assertTrue($game->hand[0]["Q"] === 0);
     }
 }
