@@ -17,12 +17,11 @@ class Database
     // execute query with result
     public function query(string $query, array $params): ?mysqli_result
     {
-        if (!$params)
-            return null;
-
-        $paramTypes = "";
-        foreach ($params as $param) {
-            $paramTypes = $paramTypes . $this->getParamType($param);
+        if ($params) {
+            $paramTypes = "";
+            foreach ($params as $param) {
+                $paramTypes = $paramTypes . $this->getParamType($param);
+            }
         }
 
         $statement = $this->db->prepare($query);
