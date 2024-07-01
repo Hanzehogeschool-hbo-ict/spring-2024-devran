@@ -12,8 +12,8 @@ class AICanPlayTest extends \PHPUnit\Framework\TestCase
     public function testAICanPlay(): void
     {
         $app = App::getInstance();
-        $app->setSession(new Session());
-        $session = $app->getSession();
+        $session = new Session();
+        $app->setSession($session);
         $game = new Game();
         $game->board = [];
         $session->set('game', $game);

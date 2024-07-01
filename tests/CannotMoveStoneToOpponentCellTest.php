@@ -1,9 +1,9 @@
 <?php
 
+use Hive\App;
 use Hive\MoveController;
 use Hive\PlayController;
 use PHPUnit\Framework\TestCase;
-use Hive\Database;
 use Hive\Game;
 use Hive\Session;
 
@@ -11,7 +11,9 @@ class CannotMoveStoneToOpponentCellTest extends TestCase
 {
     public function testCannotMoveStoneToOpponentCell()
     {
-        $session = \Hive\App::getInstance()->getSession();
+        $app = App::getInstance();
+        $session = new Session();
+        $app->setSession($session);
         $game = new Game();
         $game->board = [];
         $session->set('game', $game);
