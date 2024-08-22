@@ -14,7 +14,7 @@ class AIController extends Controller
 
     public function handlePost(): void
     {
-        $url = "spring-2024-devran-ai-1:5000";
+        $url = "hive-ai-1:5000";
         $game = $this->session->get('game');
 
         $numMoves = $this->db->query("
