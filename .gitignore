@@ -1,5 +1,4 @@
 vendor/
-#.env
 composer.phar
 **/.DS_Store
 [Dd]esktop.ini
