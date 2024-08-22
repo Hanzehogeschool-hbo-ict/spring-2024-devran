@@ -7,19 +7,17 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN apt-get update
 RUN apt install unzip
 
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+
 WORKDIR /www/html
 
-RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+COPY . .
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 COPY ./composer.* .
 
 RUN composer install
-
-COPY . .
-
-RUN composer dump-autoload --optimize
 
 EXPOSE 8000
 
