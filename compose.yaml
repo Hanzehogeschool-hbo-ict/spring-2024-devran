@@ -6,6 +6,7 @@ services:
       - db
     volumes:
       - ./:/www/html
+      - /www/html/vendor/
     ports:
       - 8000:8000
     env_file:
